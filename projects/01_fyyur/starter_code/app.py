@@ -250,11 +250,12 @@ def show_artist(artist_id):
 def edit_artist(artist_id):
   form = ArtistForm()
 
-  artist = (
-        Artist.query.with_entities(Artist.name, Artist.id)
-        .filter(Artist.id == artist_id)
-        .one_or_none()
-    )
+  # artist = (
+  #       Artist.query.with_entities(Artist.name, Artist.id)
+  #       .filter(Artist.id == artist_id)
+  #       .one_or_none()
+  #   )
+  artist = Artist.query.get(artist_id)
 
   return render_template('forms/edit_artist.html', form=form, artist=artist)
 
@@ -296,7 +297,6 @@ def edit_venue(venue_id):
 
   venue = Venue.query.get(venue_id)
 
-  # TODO: populate form with values from venue with ID <venue_id>
   return render_template('forms/edit_venue.html', form=form, venue=venue)
 
 @app.route('/venues/<int:venue_id>/edit', methods=['POST'])
