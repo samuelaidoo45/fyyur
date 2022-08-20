@@ -118,5 +118,24 @@
   <script type="text/javascript" src="/static/js/libs/bootstrap-3.1.1.min.js" defer></script>
   <script type="text/javascript" src="/static/js/plugins.js" defer></script>
 
+  {% if(request.endpoint == 'show_venue') %}
+  <script>
+    'use strict';
+    $("#delete_venue").on('click',function(){
+      const id = $(this).data('id');
+
+      $.ajax({
+        url: `/venues/${id}`,
+        type: 'DELETE',
+        success: function(){
+          $('.alert').show();
+          location.href = '/';
+        }
+      })
+    });
+  </script>
+
+  {% endif %}
+
 </body>
 </html>
