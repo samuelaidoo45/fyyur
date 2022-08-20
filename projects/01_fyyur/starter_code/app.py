@@ -294,11 +294,7 @@ def edit_artist_submission(artist_id):
 def edit_venue(venue_id):
   form = VenueForm()
 
-  venue = (
-        Venue.query.with_entities(Venue.name, Venue.id)
-        .filter(Venue.id == venue_id)
-        .one_or_none()
-    )
+  venue = Venue.query.get(venue_id)
 
   # TODO: populate form with values from venue with ID <venue_id>
   return render_template('forms/edit_venue.html', form=form, venue=venue)
